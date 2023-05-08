@@ -3,7 +3,7 @@ Ruby library for searching documents/books using OpenAI API (GPT) to find relate
 
 # Todo
 - Create a "factory" or "builder" class to do all of the heavy-lifting
-- Auto-detect which provider to use for a document based off of MIME/extension? Not sure how this could work.
+- ~Auto-detect which provider to use for a document based off of MIME/extension?~ (done)
 - Clean up the class names which might not meet Ruby standards
 - **Create more Tests!**
 
