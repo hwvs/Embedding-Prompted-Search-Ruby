@@ -8,7 +8,7 @@ Ruby library for searching documents/books using OpenAI API (GPT) to find relate
 - **Create more Tests!**
 
 # Usage
-```
+```ruby
 // TODO: Create a Factory to create everything needed
 # 1. Get the provider for a specific filetype
 documentTextProvider = DocumentTextProvider.get_provider_for_file(@filename)
