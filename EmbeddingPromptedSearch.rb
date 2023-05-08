@@ -3,7 +3,12 @@
 # Directories to scan for files to require
 dirs_to_scan = ["Containers", "Models"]
 
-excluded = ["test_helper.rb", "Test_SQLiteDocumentEmbeddingsModel.rb"]
+excluded = []
+
+require_relative "test_helper.rb"
+if !$is_running_tests # Don't load these files when running tests
+  excluded.push("Test_SQLiteDocumentEmbeddingsModel.rb")
+end
 
 dirs_to_scan.each do |dir|
   # Require all files in the directory and subdirectories recursively
