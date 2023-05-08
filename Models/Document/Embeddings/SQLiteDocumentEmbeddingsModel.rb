@@ -7,6 +7,9 @@ class SQLiteDocumentEmbeddingsModel < DocumentEmbeddingsModel
     super(documentTextModel, embeddingsProvider)
   end
 
+  # Create the table if it doesn't exist (called by initialize)
+  #
+  # @return [void]
   private def create_table_if_not_exists()
     SQLite3::Database.open(@dbPath) do |db|
       db.execute("CREATE TABLE IF NOT EXISTS embeddings (identifier TEXT, block_index INTEGER, block_text TEXT, embedding_container_json TEXT)")
@@ -14,6 +17,12 @@ class SQLiteDocumentEmbeddingsModel < DocumentEmbeddingsModel
   end
 
   # Implement interface methods
+
+  # Returns an array of TextEmbeddingContainer representing the embeddings for every block of text
+  #
+  # @param model [String] The name of the model to use
+  # @return [Array<TextEmbeddingContainer>] An array of TextEmbeddingContainer
+  #
   def get_all_embeddings(model = nil)
     raise "documentTextModel is nil" if @documentTextModel.nil?
 
@@ -87,13 +96,12 @@ class SQLiteDocumentEmbeddingsModel < DocumentEmbeddingsModel
     raise "block_index must be >= 0" if block_index < 0
     raise "block is nil" if block.nil? || block.empty?
     raise "embedding_container_json is nil" if embedding_container_json.nil?
-    
-    if(embedding_container_json.is_a?(TextEmbeddingContainer) || !embedding_container_json.is_a?(String))
+
+    if (embedding_container_json.is_a?(TextEmbeddingContainer) || !embedding_container_json.is_a?(String))
       # Doing it wrong!
       raise "embedding_container_json is a TextEmbeddingContainer, not a string (did you forget to call to_json() ?)"
     end
-    
-    
+
     SQLite3::Database.open(@dbPath) do |db|
       #update if exists, insert if not
       # there are no primary keys, so we have to check for existence

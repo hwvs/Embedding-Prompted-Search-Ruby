@@ -1,6 +1,5 @@
-require_relative "../../../test_helper.rb"
-
 class Test_SQLiteDocumentEmbeddingsModel < ActiveSupport::TestCase
+  require_relative "../../../test_helper.rb"
   require "sqlite3" #SQLite3::
 
   def test_table_is_created()

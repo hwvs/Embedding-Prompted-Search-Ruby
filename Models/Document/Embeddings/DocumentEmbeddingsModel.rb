@@ -15,7 +15,6 @@ class DocumentEmbeddingsModel
   # @return [Array<TextEmbeddingContainer>] An array of TextEmbeddingContainer
   #
   def get_all_embeddings(model = nil)
-  def get_all_embeddings
     raise "Not implemented"
   end
 
