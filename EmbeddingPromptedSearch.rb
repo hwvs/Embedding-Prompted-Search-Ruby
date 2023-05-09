@@ -5,10 +5,7 @@ dirs_to_scan = ["Containers", "Models", "AI"]
 
 excluded = ["isolated_test_runner.rb"] # Files to exclude from being required
 
-require_relative "test_helper.rb"
-if !$is_running_tests # Don't load these files when running tests
-  excluded.push("Test_SQLiteDocumentEmbeddingsModel.rb")
-end
+require_relative "Tests/test_helper.rb"
 
 dirs_to_scan.each do |dir|
   # Require all files in the directory and subdirectories recursively
@@ -16,6 +13,14 @@ dirs_to_scan.each do |dir|
     # Skip excluded files
     if excluded.include?(File.basename(file))
       next
+    end
+
+    # Don't load these files in non-testing
+    if !$is_running_tests
+      # Skip files that start with "test_"
+      if File.basename(file).downcase.start_with?("test_")
+        next
+      end
     end
 
     # Load it up

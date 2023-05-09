@@ -1,7 +1,7 @@
 require "active_record"
 
 $is_running_tests = true
-require File.join(File.dirname(__FILE__), "test_helper.rb")
+require_relative "test_helper.rb"
 
 # Grab all that inherit from ActiveSupport::TestCase
 all_test_classes = ObjectSpace.each_object(Class).select { |klass| klass < ActiveSupport::TestCase }

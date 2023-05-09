@@ -1,4 +1,4 @@
-require_relative "EmbeddingPromptedSearch.rb"
+require_relative "../EmbeddingPromptedSearch.rb"
 
 # if rails
 if defined?(Rails)
