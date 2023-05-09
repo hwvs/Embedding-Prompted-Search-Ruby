@@ -1,4 +1,6 @@
 # Embedding-Prompted-Search-Ruby
+![workflow badge](https://github.com/hwvs/Embedding-Prompted-Search-Ruby/actions/workflows/ruby.yml/badge.svg)
+
 Ruby library for searching documents/books using OpenAI API (GPT) to find related embeddings, enabling LLM-based tasks such as answering questions about authors or their books with context provided by the related embeddings.
 
 # Todo
