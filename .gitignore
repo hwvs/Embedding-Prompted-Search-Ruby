@@ -10,6 +10,8 @@
 /test/version_tmp/
 /tmp/
 
+*.lock # Ignore the default Gemfile.lock automatically generated for apps using bundler.
+
 # Used by dotenv library to load environment variables.
 # .env
 
