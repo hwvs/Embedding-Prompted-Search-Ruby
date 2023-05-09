@@ -2,7 +2,12 @@ class Test_SQLiteDocumentEmbeddingsModel < ActiveSupport::TestCase
   require_relative File.join("..", "..", "..", "test_helper.rb")
   require "sqlite3" #SQLite3::
 
-  def test_table_is_created()
+  public def test_all()
+    test_build()
+    test_table_is_created()
+  end
+
+  private def test_table_is_created()
     assert $test_documentEmbeddingsModel != nil, "$test_documentEmbeddingsModel is nil"
 
     # The table should exist if the constructor has been run
@@ -18,7 +23,7 @@ class Test_SQLiteDocumentEmbeddingsModel < ActiveSupport::TestCase
     end
   end
 
-  def test_build()
+  private def test_build()
     assert $test_documentEmbeddingsModel != nil, "$test_documentEmbeddingsModel is nil"
     assert $test_documentTextProvider != nil, "$test_documentTextProvider is nil"
 

@@ -4,10 +4,11 @@ class OpenAIProvider
   DEFAULT_MODEL_EMBEDDINGS = "text-embedding-ada-002"
   DEFAULT_MODEL_COMPLETIONS = "text-davinci-003"
 
-  # Embeddings text-search
-
+  # Constructor
+  #
   # @param [OpenAICacheProvider] openAICacheProvider
   # @param [String] api_key
+  # @return [void]
   def initialize(openAICacheProvider, api_key = nil)
     raise ArgumentError, "Error, openAICacheProvider is null (I'm not a billionaire!!! Cache those calls!)" if openAICacheProvider.nil?
     @openAICacheProvider = openAICacheProvider
@@ -17,6 +18,12 @@ class OpenAIProvider
 
     @openai = OpenAI::Client.new(access_token: @api_key)
   end
+
+  # Never allow api_key to be output in error messages
+  def inspect
+    "#<#{self.class.name}>"
+  end
+  
 
   def get_default_model_embeddings
     return DEFAULT_MODEL_EMBEDDINGS
@@ -139,5 +146,23 @@ class OpenAIProvider
       puts "Backtrace: " + exception.backtrace.inspect
       return nil
     end
+  end
+end
+
+class MockOpenAIProvider < OpenAIProvider
+  def initialize(openAICacheProvider, api_key = nil)
+    super(openAICacheProvider, "12345")
+
+    puts "==== MockOpenAIProvider initialized ===="
+    puts "Do not use this in production!"
+    puts "==== MockOpenAIProvider initialized ===="
+  end
+
+  def get_embeddings_for_text(text, model = nil)
+    return [0.1, 0.2, 0.3]
+  end
+
+  def get_completion_for_text(text, model = nil, stop = nil, bypass_cache = false, max_tokens = 512, temperature = 0.7, top_p = 1, frequency_penalty = 0, presence_penalty = 0.0)
+    return "This is a test"
   end
 end

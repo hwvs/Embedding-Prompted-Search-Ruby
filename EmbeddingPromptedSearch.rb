@@ -1,9 +1,9 @@
 # This file is the main file for the EmbeddingPromptedSearch module. It requires all the other files in the module.
 
 # Directories to scan for files to require
-dirs_to_scan = ["Containers", "Models"]
+dirs_to_scan = ["Containers", "Models", "AI"]
 
-excluded = []
+excluded = ["isolated_test_runner.rb"] # Files to exclude from being required
 
 require_relative "test_helper.rb"
 if !$is_running_tests # Don't load these files when running tests
@@ -22,7 +22,5 @@ dirs_to_scan.each do |dir|
     require file
   end
 end
-
-require_relative "OpenAIProvider.rb"
 
 #    cool

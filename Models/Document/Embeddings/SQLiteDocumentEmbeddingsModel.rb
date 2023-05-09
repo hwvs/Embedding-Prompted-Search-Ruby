@@ -95,9 +95,14 @@ class SQLiteDocumentEmbeddingsModel < DocumentEmbeddingsModel
     raise "identifier is nil" if identifier.nil? || identifier.empty?
     raise "block_index must be >= 0" if block_index < 0
     raise "block is nil" if block.nil? || block.empty?
-    raise "embedding_container_json is nil" if embedding_container_json.nil?
 
-    if (embedding_container_json.is_a?(TextEmbeddingContainer) || !embedding_container_json.is_a?(String))
+    #raise "embedding_container_json is nil" if embedding_container_json.nil?
+
+    if (embedding_container_json.nil?)
+      embedding_container_json = "" # This means it needs to be written later. Nil is ok as a param
+    end
+
+    if (!embedding_container_json.nil? && (embedding_container_json.is_a?(TextEmbeddingContainer) || !embedding_container_json.is_a?(String)))
       # Doing it wrong!
       raise "embedding_container_json is a TextEmbeddingContainer, not a string (did you forget to call to_json() ?)"
     end

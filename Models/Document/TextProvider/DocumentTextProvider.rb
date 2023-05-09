@@ -30,6 +30,9 @@ class DocumentTextProvider
     if filename.nil? && file_extension.nil? && file_mime_type.nil?
       raise "At least one of filename, file_extension or file_mime_type must be provided"
     end
+
+    raise ("File doesn't exist: " + filename) if !filename.nil? && !File.exist?(filename)
+
     if !filename.nil? && file_extension.nil? && file_mime_type.nil? # Filename, but no extension or mime type. Let's try to get it from the filename
       file_extension = File.extname(filename)
 
