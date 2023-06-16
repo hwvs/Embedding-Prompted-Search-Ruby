@@ -33,7 +33,7 @@ class SQLiteDocumentEmbeddingsModel < DocumentEmbeddingsModel
     embeddings = []
     SQLite3::Database.open(@dbPath) do |db|
       db.execute("SELECT embedding_container_json,block_text FROM embeddings WHERE identifier = ? ORDER BY block_index ASC", identifier) do |row|
-        container = row[0].nil? ? nil : TextEmbeddingContainer.from_json(row[0])
+        container = (row[0].nil? || (row[0].length == 0)) ? nil : TextEmbeddingContainer.from_json(row[0])
         text = row[1]
         embeddings.push({ container: container, text: text })
       end
