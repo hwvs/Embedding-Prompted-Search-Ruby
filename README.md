@@ -13,21 +13,22 @@ Ruby library for searching documents/books using OpenAI API (GPT) to find relate
 ```ruby
 # TODO: Create a Factory to create everything needed
 
-# 1. Get the provider for a specific filetype
-documentTextProvider = DocumentTextProvider.get_provider_for_file(@filename)
+# 1. Obtain the provider for a specific filetype
+document_text_provider = DocumentTextProvider.get_provider_for_file(@filename)
 
-# 2. Create a new document model
-sqliteDocumentTextModel = SQLiteDocumentTextModel.new(DATABASE_PATH, documentTextProvider)
-# 2.1 generate the database
-sqliteDocumentTextModel.build()
+# 2. Instantiate a new document model
+sqlite_document_text_model = SQLiteDocumentTextModel.new(DATABASE_PATH, document_text_provider)
 
-# 3. Create a new OpenAI provider with a cache provider
-@openAICacheProvider = SQLiteOpenAICacheProvider.new(DATABASE_PATH)
-@openAIProvider = OpenAIProvider.new(@openAICacheProvider)
+# 2.1 Generate the database
+sqlite_document_text_model.build()
 
-# 4. Create a new document embeddings model
-@documentEmbeddingsModel = SQLiteDocumentEmbeddingsModel.new(DATABASE_PATH, sqliteDocumentTextModel, @openAIProvider)
+# 3. Instantiate a new OpenAI provider with a cache provider
+@open_ai_cache_provider = SQLiteOpenAICacheProvider.new(DATABASE_PATH)
+@open_ai_provider = OpenAIProvider.new(@open_ai_cache_provider)
 
-# 5. Create a new document search model
-@documentSearchModel = DocumentSearchModel.new(@documentEmbeddingsModel)
+# 4. Instantiate a new document embeddings model
+@document_embeddings_model = SQLiteDocumentEmbeddingsModel.new(DATABASE_PATH, sqlite_document_text_model, @open_ai_provider)
+
+# 5. Instantiate a new document search model
+@document_search_model = DocumentSearchModel.new(@document_embeddings_model)
 ```
